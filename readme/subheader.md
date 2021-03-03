@@ -4,7 +4,7 @@
     <span> | </span>
     <a href="https://app.vagrantup.com/{{ variables.vagrantup_user }}/boxes/{{ variables.box_basename }}">VagrantUp Box</a>
     <span> | </span>
-    <a href="{{ repository.group.packer }}/{{ role_name }}/-/blob/master/CONTRIBUTING.md">Contributing</a>
+    <a href="{{ repository.group.packer }}/{{ variables.box_basename }}/-/blob/master/CONTRIBUTING.md">Contributing</a>
     <span> | </span>
     <a href="{{ chat_url }}">Chat</a>
     <span> | </span>
@@ -20,6 +20,6 @@
     <img alt="License: {{ license }}" src="https://img.shields.io/badge/License-{{ license }}-yellow.svg" />
   </a>
   <a href="https://twitter.com/{{ profile.twitter }}" target="_blank">
-    <img alt="Twitter: {{ profile.twitter }}" src="https://img.shields.io/twitter/follow/{{ profile.twitter }}.svg?style=social" />
+    <img alt="Twitter: {{ profile.twitter }}" src="https://img.shields.io/twitter/follow/@{{ profile.twitter }}.svg?style=social" />
   </a>
 </p>

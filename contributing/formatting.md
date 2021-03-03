@@ -3,7 +3,7 @@
 In each of our Packer repositories, you will see a file named `template.json`. This serves as the configuration file that Packer uses when building our boxes. Please follow the guidelines below when formatting a `template.json` file:
 
 * The `"variables"` section should be at the top of the `template.json` file
-* Make sure the variable names are consistent across [our Packer repositories]({{ }}).
+* Make sure the variable names are consistent across [our Packer repositories]({{ repository.group.packer }}).
 * Prefer naming the variables after the section they will be placed.
 	* For example, the variable used for `ssh_password` should also be named `ssh_password` so it looks like this: `"ssh_password": "{{ user \`ssh_password\` }}"`.
 * All the JSON objects should be in alphabetical order with the following exceptions:

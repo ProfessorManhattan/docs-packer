@@ -1,6 +1,6 @@
 ## Quick Start
 
-You can quickly spin up the finished product of this repository by running the following code with VirtualBox and Vagrant installed:
+If you have VirtualBox and Vagrant installed, you can quickly spin up the finished product of this repository by running the following code in the root directory of this repository:
 
 ```shell
 vagrant up

@@ -1,3 +1,3 @@
 ## License
 
-Copyright © 2021 [Megabyte LLC]({{ website.homepage }}). This project is [{{ license }}]({{ repository.gitlab_ansible_roles_group }}/{{ role_name }}/-/raw/master/LICENSE) licensed.
+Copyright © {{ copyright_date_range }} [{{ company_name }}]({{ website.homepage }}). This project is [{{ license }}]({{ repository.group.packer }}/{{ variables.box_basename }}/-/raw/master/LICENSE) licensed.

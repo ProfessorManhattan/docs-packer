@@ -1,8 +1,17 @@
 ## Overview
 
-[chef/bento](https://github.com/chef/bento/tree/master/packer_templates) has already done most of the work we are trying to accomplish. They have Packer templates for everything except Archlinux and Mac OS X. Since it has a huge following, updates are likely to be provided. We will be using chef/bento as our upstream provider wherever possible. They provide shell scripts that do a lot of the setup we need to initialize boxes. In each of our repositories, we will include chef/bento as a submodule. By doing this, we will be able to symlink the shell scripts into our scripts folder. This repository serves as an example.
+Our VM images aim to be minimal, performant, and pretty. They are minimal because they remove unnecessary files and are compressed before uploading them to VagrantUp. Our images are performant because we choose the right configurations. We also ensure there is a seemless experience by including the Plymouth boot loader.
 
-There are a few changes that need to be done. The first thing we will be doing is having one file named `template.json` in each OS family repository. Through automation, our vagrantup.com pages will (down the road) have the built boxes at all the different versions. This will be done automatically by using a project that another contractor made called [LatestOS](https://pypi.org/project/latestos/). The latest version of each Linux OS will be checked and compiled on a cron job on multiple machines so we can generate the assets for:
+A popular repository on GitHub called [chef/bento](https://github.com/chef/bento/tree/master/packer_templates) has already done most of the work we are trying to accomplish. They have Packer templates for everything we aim to support except Archlinux and Mac OS X. Since it has a huge following, updates are likely to be provided. We use chef/bento's source wherever possible. They provide shell scripts that do a lot of the setup needed to initialize boxes. In each of our repositories, you can see that we symlink into a chef/bento submodule. By doing this, we are able to receive updates directly from our upstream code provider.
+
+However, chef/bento's work is not perfect for our use case. There are a few changes we make to each of our repositories. The `template.json` is reformatted to be neater and slightly easier to read. There are additional scripts we run to convert the distribution into a desktop environment. Ideally, five years from now, if you go to our VagrantUp repositories you will be able to browse through all the various releases in any OS distribution. Our goal is to accomplish this through automation by:
+
+* Including the vagrant-cloud post-processor
+* Leveraging [LatestOS](https://pypi.org/project/latestos/) to automatically detect the latest release of the Linux variants we build boxes for (This allows us to automatically have the latest upstream changes on our VagrantUp desktop images.)
+
+### Virtualization Platforms
+
+We aim to support the following virtualization platforms:
 
 * Parallels
 * Hyper-V

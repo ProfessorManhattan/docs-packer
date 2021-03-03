@@ -1,4 +1,4 @@
 <p align="center">
-  <b>Packer files for building and automatically updating a minimal [VagrantUp](https://www.vagrantup.com/) {{ variables.description }} box</b></br>
+  <b>Packer files for building and automatically updating minimal [VagrantUp](https://www.vagrantup.com/) {{ variables.description }} boxes</b></br>
   <sub>Heyoooooo<sub>
 </p>

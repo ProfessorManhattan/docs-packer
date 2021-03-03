@@ -7,4 +7,5 @@
 {{ load:modules/docs/readme/quick-start.md }}
 {{ load:modules/docs/readme/creating-box.md }}
 {{ load:modules/docs/readme/updating.md }}
+{{ load:modules/docs/readme/contributing-details.md }}
 {{ load:modules/docs/readme/license.md }}

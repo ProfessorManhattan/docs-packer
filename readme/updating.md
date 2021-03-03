@@ -6,6 +6,6 @@ You can also automate the process of retrieving the latest ISO and checksum URL 
 
 ```shell
 pip3 install latestos
-latestos {{ variables.latestos_tag }}
+latestos {{ variables.latestos_tag }} # Options include arch, centos, debian, fedora, and ubuntu
 packer build -only=virtualbox-iso template.json
 ```

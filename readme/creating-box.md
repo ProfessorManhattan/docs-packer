@@ -1,0 +1,17 @@
+## Creating Your Own Box
+
+You can quickly use this project to create your own minimal {{ variables.description }} box by:
+
+1. Creating a box on VagrantUp titled {{ variables.box_basename }} - *Note: You can change the title by modifying the `"box_basename"` variable in `template.json`*
+2. Changing the `"vagrantup_user"` variable in `template.json` to your VagrantUp username
+3. Running the following code
+
+```shell
+bash .update.sh
+export VAGRANT_CLOUD_TOKEN={{ YourTokenHere }}
+packer build -only=virtualbox-iso template.json
+```
+
+The example above will build a VirtualBox {{ variables.description }} box and upload it to your VagrantUp box *(that you have to create before running the script that is above)*. If you want to build the box for another provider then look at the `template.json` in the `"builders"` section for the types of boxes you can create.
+
+If you do not want your box to be automatically uploaded to VagrantUp then you will need to remove the `"vagrant-cloud"` section under `"post-processors"`.

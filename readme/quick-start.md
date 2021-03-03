@@ -5,3 +5,5 @@ If you have VirtualBox and Vagrant installed, you can quickly spin up the finish
 ```shell
 vagrant up
 ```
+
+The default username and password are both *vagrant*.

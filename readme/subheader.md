@@ -12,9 +12,11 @@
   </h4>
 </div>
 <p style="text-align:center;">
-  <img alt="Version" src="https://img.shields.io/badge/version-{{ variables.iso_version }}-blue.svg?cacheSeconds=2592000" />
+  <a href="{{ repository.group.packer }}/{{ variables.box_basename }}">
+    <img alt="Version" src="https://img.shields.io/badge/version-{{ variables.iso_version }}-blue.svg?cacheSeconds=2592000" />
+  </a>
   <a href="{{ website.documentation }}/packer" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" style="margin-bottom:0;" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="{{ repository.group.packer }}/{{ variables.box_basename }}/-/raw/master/LICENSE" target="_blank">
     <img alt="License: {{ license }}" src="https://img.shields.io/badge/License-{{ license }}-yellow.svg" />

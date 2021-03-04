@@ -52,4 +52,4 @@ version:
   Used by 'npm run prepare-release' to update the CHANGELOG
 ```
 
-For example, `npm run build` will run the build step. You can see exactly what each command is doing by checking out the `package.json` file.
+For example, `npm run build` will run the `build` step described above. You can see exactly what each command is doing by checking out the `package.json` file.

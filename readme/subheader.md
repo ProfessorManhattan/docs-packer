@@ -14,12 +14,12 @@
 <p style="text-align:center;">
   <img alt="Version" src="https://img.shields.io/badge/version-{{ variables.iso_version }}-blue.svg?cacheSeconds=2592000" />
   <a href="{{ website.documentation }}/packer" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" style="margin-bottom:0;" />
   </a>
   <a href="{{ repository.group.packer }}/{{ variables.box_basename }}/-/raw/master/LICENSE" target="_blank">
     <img alt="License: {{ license }}" src="https://img.shields.io/badge/License-{{ license }}-yellow.svg" />
   </a>
   <a href="https://twitter.com/{{ profile.twitter }}" target="_blank">
-    <img alt="Twitter: {{ profile.twitter }}" src="https://img.shields.io/twitter/follow/@{{ profile.twitter }}.svg?style=social" />
+    <img alt="Twitter: {{ profile.twitter }}" src="https://img.shields.io/twitter/follow/{{ profile.twitter }}.svg?style=social" />
   </a>
 </p>

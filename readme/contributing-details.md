@@ -1,6 +1,6 @@
 ## Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page]({{ repository.group.packer }}/{{ variables.box_basename }}/-/issues). If you would like to contribute, please take a look at the [contributing guide]({{ repository.group.packer }}/{{ variables.box_basename }}/-/raw/master/CONTRIBUTING.md).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page]({{ repository.group.packer }}/{{ variables.box_basename }}/-/issues). If you would like to contribute, please take a look at the [contributing guide]({{ repository.group.packer }}/{{ variables.box_basename }}/-/blob/master/CONTRIBUTING.md).
 
 <details>
 <summary>Sponsorship</summary>

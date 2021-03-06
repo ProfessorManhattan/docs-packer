@@ -7,4 +7,4 @@ There are a few core principles that we stick to when designing these Packer pro
 * **Minimal** and include no bloatware
 * **Compact** in size so people can download/provision their VM quicker
 * **Pretty** (e.g. the Plymouth loader should be installed so that the boot screen looks good)
-* ***Performant**
+* **Performant**

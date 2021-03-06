@@ -1,6 +1,6 @@
 ## Getting Started
 
-This repository leverages Node.js to provide linting, auto-fixing, and streamline the commit process. With Node.js installed, you start up the project by running:
+This repository leverages Node.js to provide linting, auto-fixing, and streamline the commit process. With Node.js (version 12 or higher) installed, you can start up the project's development environment by running:
 
 ```
 npm i
@@ -48,4 +48,4 @@ version:
   Used by 'npm run prepare-release' to update the CHANGELOG
 ```
 
-For example, `npm run build` will run the `build` step described above. You can see exactly what each command is doing by checking out the `package.json` file.
+According to the help menu above, `npm run build` will run the `build` step described above. You can see exactly what each command is doing by checking out the `package.json` file.

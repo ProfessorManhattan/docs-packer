@@ -1,4 +1,3 @@
-
 <h4>
   <a href="https://app.vagrantup.com/{{ variables.vagrantup_user }}">VagrantUp Profile</a>
   <span> | </span>

@@ -3,7 +3,7 @@
     <a href="{{ website.homepage }}" title="Megabyte Labs homepage" target="_blank">
       <img src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/home-solid.svg" />
     </a>
-    <a href="https://app.vagrantup.com/{{ variables.vagrantup_user }}/boxes/{{ variables.box_basename }}" title="{{ variables.description }} role on VagrantUp.com" target="_blank">
+    <a href="https://app.vagrantup.com/{{ variables.vagrantup_user }}/boxes/{{ variables.box_basename }}" title="{{ variables.description }} box on VagrantUp.com" target="_blank">
       <img height="50" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/svg/vagrant.svg" />
     </a>
     <a href="{{ repository.group.packer }}/{{ slug }}/-/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">

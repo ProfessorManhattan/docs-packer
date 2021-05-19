@@ -1,6 +1,6 @@
 \<div align="center">
   <center>
-    <a href="{{ repository.group.packer }}/{{ slug }}" title="{{ variables.description GitLab page" target="_blank">
+    <a href="{{ repository.group.packer }}/{{ slug }}" title="{{ variables.description }} GitLab page" target="_blank">
       <img width="140" height="140" alt="{{ variables.description }} logo" src="./logo.png" />
     </a>
   </center>

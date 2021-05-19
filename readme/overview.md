@@ -10,7 +10,7 @@ This repository automates most of the process of keeping our [{{ variables.descr
 
 ### Supported Virtualization Platforms
 
-Most of our repositories support creating boxes for the following virtualization platforms:
+This project supports creating boxes for the following virtualization platforms:
 
 * [Hyper-V]({{ repository.group.ansible_roles }}/hyperv) <!-- SUPPORTED_OS_HYPERV -->
 * [KVM]({{ repository.group.ansible_roles }}/kvm) <!-- SUPPORTED_OS_KVM -->

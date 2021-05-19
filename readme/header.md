@@ -1,7 +1,7 @@
 <div align="center">
   <center>
     <a href="{{ repository.group.packer }}/{{ slug }}" title="{{ variables.description }} GitLab page" target="_blank">
-      <img width="114" height="114" alt="{{ variables.description }} logo" src="./logo.png" />
+      <img width="100" height="100" alt="{{ variables.description }} logo" src="./logo.png" />
     </a>
   </center>
 </div>

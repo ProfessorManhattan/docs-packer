@@ -1,6 +1,6 @@
 ## Overview
 
-Our VM images aim to be minimal, performant, and pretty. They are minimal because they remove unnecessary files and are compressed before uploading them to [VagrantUp](https://www.vagrantup.com/). Our images are performant because we choose the right configurations. We also ensure there is a seemless experience by including the Plymouth boot loader (which makes them *prettier*).
+Our VM images aim to be minimal, performant, and pretty. They are minimal because they remove unnecessary files and are compressed before uploading them to [VagrantUp](https://www.vagrantup.com/). Our images are performant because we choose the right configurations. We also ensure there is a seamless experience by including the Plymouth boot loader (which makes them *prettier*).
 
 A popular repository on GitHub called [chef/bento](https://github.com/chef/bento/tree/master/packer_templates) has already done most of the work we are trying to accomplish. They have Packer templates for everything we aim to support except [Archlinux]({{ repository.group.packer }}/base-archlinux-desktop) and [Mac OS X]({{ repository.group.packer }}/base-mac-desktop). Since it has a huge following, updates are likely to be provided. We use chef/bento's source wherever possible. They provide shell scripts that do a lot of the setup needed to initialize boxes. In each of our repositories (except Archlinux and Mac OS X), you can see that we symlink to a chef/bento submodule. By doing this, we are able to receive updates directly from our upstream code provider.
 

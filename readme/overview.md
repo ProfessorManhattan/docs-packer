@@ -12,10 +12,8 @@ This repository automates most of the process of keeping our [{{ variables.descr
 
 Most of our repositories support creating boxes for the following virtualization platforms:
 
-* [Hyper-V]({{ repository.group.ansible_roles }}/hyperv)
-* [KVM]({{ repository.group.ansible_roles }}/kvm)
-* [Parallels]({{ repository.group.ansible_roles }}/parallels)
-* [VirtualBox]({{ repository.group.ansible_roles }}/virtualbox)
-* [VMWare]({{ repository.group.ansible_roles }}/vmware)
-
-Please note that not all of [our Packer projects]({{ repository.group.packer }}) support building for all of the virtualization platforms listed above. You can check out exactly what platforms this repository supports by browsing through the types in the `"builders"` section of the `template.json` file found in the root of this repository.
+* [Hyper-V]({{ repository.group.ansible_roles }}/hyperv) <!-- SUPPORTED_OS_HYPERV -->
+* [KVM]({{ repository.group.ansible_roles }}/kvm) <!-- SUPPORTED_OS_KVM -->
+* [Parallels]({{ repository.group.ansible_roles }}/parallels) <!-- SUPPORTED_OS_PARALLELS -->
+* [VirtualBox]({{ repository.group.ansible_roles }}/virtualbox) <!-- SUPPORTED_OS_VIRTUALBOX -->
+* [VMWare]({{ repository.group.ansible_roles }}/vmware) <!-- SUPPORTED_OS_VMWARE -->

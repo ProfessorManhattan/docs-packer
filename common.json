@@ -19,6 +19,7 @@
     "profile": {
         "galaxy": "https://galaxy.ansible.com/professormanhattan",
         "github": "https://github.com/ProfessorManhattan",
+        "github_user": "ProfessorManhattan",
         "linkedin": "https://www.linkedin.com/in/blzalewski",
         "npmjs": "https://www.npmjs.com/~thisismyfirstday",
         "patreon": "https://www.patreon.com/ProfessorManhattan",
@@ -30,24 +31,24 @@
     },
     "repository": {
         "group": {
-          "ansible_roles": "https://gitlab.com/megabyte-space/ansible-roles",
-          "apps": "https://gitlab.com/megabyte-space/apps",
-          "ci": "https://gitlab.com/megabyte-space/ci",
-          "cloud": "https://gitlab.com/megabyte-space/cloud",
-          "common": "https://gitlab.com/megabyte-space/common",
-          "cryptocurrency": "https://gitlab.com/megabyte-space/cryptocurrency",
-          "docker_compose": "https://gitlab.com/megabyte-space/docker-compose",
-          "dockerfile": "https://gitlab.com/megabyte-space/dockerfile",
-          "documentation": "https://gitlab.com/megabyte-space/documentation",
-          "kubernetes": "https://gitlab.com/megabyte-space/kubernetes",
-          "npm": "https://gitlab.com/megabyte-space/npm",
-          "packer": "https://gitlab.com/megabyte-space/packer",
-          "python": "https://gitlab.com/megabyte-space/python",
-          "software": "https://gitlab.com/megabyte-space/software",
-          "web_components": "https://gitlab.com/megabyte-space/web-components"
+          "ansible_roles": "https://gitlab.com/megabyte-labs/ansible-roles",
+          "apps": "https://gitlab.com/megabyte-labs/apps",
+          "ci": "https://gitlab.com/megabyte-labs/ci",
+          "cloud": "https://gitlab.com/megabyte-labs/cloud",
+          "common": "https://gitlab.com/megabyte-labs/common",
+          "cryptocurrency": "https://gitlab.com/megabyte-labs/cryptocurrency",
+          "docker_compose": "https://gitlab.com/megabyte-labs/docker-compose",
+          "dockerfile": "https://gitlab.com/megabyte-labs/dockerfile",
+          "documentation": "https://gitlab.com/megabyte-labs/documentation",
+          "kubernetes": "https://gitlab.com/megabyte-labs/kubernetes",
+          "npm": "https://gitlab.com/megabyte-labs/npm",
+          "packer": "https://gitlab.com/megabyte-labs/packer",
+          "python": "https://gitlab.com/megabyte-labs/python",
+          "software": "https://gitlab.com/megabyte-labs/software",
+          "web_components": "https://gitlab.com/megabyte-labs/web-components"
         },
         "playbooks": "https://gitlab.com/ProfessorManhattan/Playbooks",
-        "wrangler": "https://gitlab.com/megabyte-space/wrangler"
+        "wrangler": "https://gitlab.com/megabyte-labs/wrangler"
     },
     "website": {
         "documentation": "https://megabyte.space/docs",

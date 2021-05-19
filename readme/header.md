@@ -1,5 +1,9 @@
 \<div align="center">
-  <center><img alt="{{ variables.description }} logo" src="./logo.png" /></center>
+  <center>
+    <a href="{{ repository.group.packer }}/{{ slug }}" title="{{ variables.description GitLab page" target="_blank">
+      <img alt="{{ variables.description }} logo" src="./logo.png" />
+    </a>
+  </center>
 </div>
 <div align="center">
   <center><h1 align="center">Packer Template: {{ variables.description }}</h1></center>

@@ -33,13 +33,13 @@
       <img alt="Last commit date" src="https://img.shields.io/github/last-commit/{{ profile.github_user }}/packer-{{ slug }}?logo=git&logoColor=white&style={{ badge_style }}" />
     </a>
     <a href="{{ website.documentation }}/packer" target="_blank">
-      <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style={{ badge_style }}" />
+      <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?style={{ badge_style }}" />
     </a>
     <a href="{{ repository.group.packer }}/{{ slug }}/-/raw/master/LICENSE" target="_blank">
-      <img alt="License: {{ pkg.license }}" src="https://img.shields.io/badge/License-{{ pkg.license }}-yellow.svg?style={{ badge_style }}" />
+      <img alt="License: {{ pkg.license }}" src="https://img.shields.io/badge/license-{{ pkg.license }}-yellow.svg?style={{ badge_style }}" />
     </a>
     <a href="{{ profile.opencollective }}" title="Support us on Open Collective" target="_blank">
-      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?label=Open%20Collective%20sponsors&logo=opencollective&style={{ badge_style }}" />
+      <img alt="Open Collective sponsors" src="https://img.shields.io/opencollective/sponsors/megabytelabs?label=Open%20Collective%20sponsors&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAACvzfmFsft4pfD////w+P9tuc5RAAAABHRSTlMAFBERkdVu1AAAAFxJREFUKM9jgAAXIGBAABYXMHBA4yNEXGBAAU2BMz4FIIYTNhtFgRjZPkagFAuyAhGgHAuKAlQBCBtZB4gzQALoDsN0Oobn0L2PEUCoQYgZyOjRQFiJA67IRrEbAJImNwFBySjCAAAAAElFTkSuQmCC&style={{ badge_style }}" />
     </a>
     <a href="{{ profile.github }}" title="Support us on GitHub" target="_blank">
       <img alt="GitHub sponsors" src="https://img.shields.io/github/sponsors/{{ profile.github_user }}?label=GitHub%20sponsors&logo=github&style={{ badge_style }}" />

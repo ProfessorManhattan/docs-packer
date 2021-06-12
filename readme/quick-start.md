@@ -6,4 +6,4 @@ If you have VirtualBox and Vagrant installed, you can quickly spin up the finish
 vagrant up
 ```
 
-The default username and password are both *vagrant*.
+The default username and password are both _vagrant_.

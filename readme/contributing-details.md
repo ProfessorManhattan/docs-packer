@@ -10,7 +10,8 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 I create open source projects out of love. Although I have a job, shelter, and as much fast food as I can handle, it would still be pretty cool to be appreciated by the community for something I have spent a lot of time and money on. Please consider sponsoring me! Who knows? Maybe I will be able to quit my job and publish open source full time.
 <br/><br/>Sincerely,<br/><br/>
 
-***Brian Zalewski***<br/><br/>
+**_Brian Zalewski_**<br/><br/>
+
 </blockquote>
 
 <a href="{{ profile.patreon }}">

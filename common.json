@@ -1,25 +1,30 @@
 {
-  "apps": [
-    {
-      "name": "Music Blobs",
-      "url": "https://musicblobs.com"
-    },
-    {
-      "name": "Video Blobs",
-      "url": "https://videoblobs.com"
-    }
-  ],
-  "chat_url": "https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/",
-  "checkLinks": false,
-  "contact_email": "help@megabyte.space",
+  "badge_style": "flat",
+  "company": "Megabyte LLC",
   "copyright": "2021",
+  "email": {
+    "help": "help@megabyte.space",
+    "personal": "brian@megabyte.space"
+  },
   "license": "MIT",
-  "line": "aqua",
-  "company_name": "Megabyte LLC",
+  "link": {
+    "chat": "https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/",
+    "docs": "https://megabyte.space/docs",
+    "home": "https://megabyte.space",
+    "installdoctor": "https://install.doctor",
+    "privacy": "https://megabyte.space/privacy",
+    "shield": "https://shields.io",
+    "terms": "https://megabyte.space/terms"
+  },
+  "misc": {
+    "appnest": "https://github.com/andreasbm/readme",
+    "husky": "https://www.npmjs.com/package/husky",
+    "tinypng": "https://tinypng.com/"
+  },
+  "organization": "Megabyte Labs",
   "profile": {
     "galaxy": "https://galaxy.ansible.com/professormanhattan",
     "github": "https://github.com/ProfessorManhattan",
-    "github_user": "ProfessorManhattan",
     "linkedin": "https://www.linkedin.com/in/blzalewski",
     "npmjs": "https://www.npmjs.com/~thisismyfirstday",
     "opencollective": "https://opencollective.com/megabytelabs",
@@ -28,7 +33,21 @@
     "replit": "https://repl.it/@ProfessorMegaby",
     "stackblitz": "https://stackblitz.com/@ProfessorManhattan",
     "twitter": "MegabyteLabs",
-    "vagrant": "https://app.vagrantup.com/ProfessorManhattan"
+    "vagrant": "https://app.vagrantup.com/ProfessorManhattan",
+    "github_user": "ProfessorManhattan"
+  },
+  "profile_link": {
+    "galaxy": "https://galaxy.ansible.com",
+    "github": "https://github.com",
+    "linkedin": "https://www.linkedin.com/in/",
+    "npmjs": "https://www.npmjs.com/~",
+    "opencollective": "https://opencollective.com",
+    "patreon": "https://www.patreon.com",
+    "pypi": "https://pypi.org/user",
+    "replit": "https://repl.it/@",
+    "stackblitz": "https://stackblitz.com/@",
+    "twitter": "MegabyteLabs",
+    "vagrant": "https://app.vagrantup.com"
   },
   "repository": {
     "group": {
@@ -48,9 +67,40 @@
       "software": "https://gitlab.com/megabyte-labs/software",
       "web_components": "https://gitlab.com/megabyte-labs/web-components"
     },
+    "location": {
+      "conduct": "/-/blob/master/CODE_OF_CONDUCT.md",
+      "contributing": "/-/blob/master/CONTRIBUTING.md",
+      "demo": "/-/raw/master/.demo.gif",
+      "issues": "/-/issues",
+      "license": "/-/raw/master/LICENSE",
+      "logo": "/-/raw/master/logo.png",
+      "readme": "/-/blob/master/README.md"
+    },
+    "project": {
+      "ansible": "https://github.com/ProfessorManhattan/ansible-",
+      "assets": "https://gitlab.com/megabyte-labs/assets/-/raw/master",
+      "autodoc": "https://github.com/AndresBott/ansible-autodoc",
+      "playbooks": "https://gitlab.com/ProfessorManhattan/Playbooks",
+      "wrangler": "https://gitlab.com/megabyte-labs/wrangler"
+    },
     "playbooks": "https://gitlab.com/ProfessorManhattan/Playbooks",
     "wrangler": "https://gitlab.com/megabyte-labs/wrangler"
   },
+  "apps": [
+    {
+      "name": "Music Blobs",
+      "url": "https://musicblobs.com"
+    },
+    {
+      "name": "Video Blobs",
+      "url": "https://videoblobs.com"
+    }
+  ],
+  "chat_url": "https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/",
+  "checkLinks": false,
+  "contact_email": "help@megabyte.space",
+  "line": "aqua",
+  "company_name": "Megabyte LLC",
   "website": {
     "documentation": "https://megabyte.space/docs",
     "homepage": "https://megabyte.space",

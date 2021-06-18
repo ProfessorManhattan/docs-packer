@@ -7,7 +7,3 @@ You can re-build the documentation by running the following command in one of th
 ```
 bash .start.sh
 ```
-
-
-
-

@@ -1,0 +1,31 @@
+# Megabyte Labs Documentation Partials
+
+In all of our projects, we strive to maintain useful and informative documentation. However, with hundreds of projects and limited man power, it can be tricky. To solve this problem, we re-use documentation partials to generate the documentation in each of our repositories.
+
+There are two repositories responsible for generating the documentation for each project:
+
+1. **[Shared documentation repository](https://gitlab.com/megabyte-labs/documentation/shared):** This repository contains documentation partials that are used throughout all of our repositories.
+2. **Project type documentation repository:** This repository is where we store documentation that is specific to the type of project that downstream repository is. For example, if the downstream project is an Ansible role, then the repositories that will be used to generate the documentation will be the shared documentation repository and the [Ansible documentation repository](https://gitlab.com/megabyte-labs/documentation/ansible).
+
+## Repository Pipeline Order
+
+Whenever a change is made to the shared documentation repository, the pipeline for the project-specific repositories will trigger. Part of that pipeline includes cloning the shared documentation repository into the project-specific repository. When this happens, the `common/` folder in the shared repository is copied over to the project-specific repository.
+
+After the `common/` folder is copied over, the project-specific repository will trigger the pipeline for the project-specific common files repository. An example of a project-specific common files repository is the [Ansible common files repository](https://gitlab.com/megabyte-labs/common/ansible). When this is happens, the project-specific documentation repository is added to the project-specific common files repository in the `docs/` folder.
+
+Finally, after the project-specific common files repository is up-to-date, the files it contains are propagated out to the individual projects that all of these repositories are for. This whole process allows us to update, say, a spelling error in the documentation to every project in our eco-system without an repetition.
+
+## Flow Summary
+
+To summarize, the order of the flow is:
+
+1. Shared documentation repository
+2. Project-specific documentation repository
+3. Project-specific common files repository
+4. Individual project repository.
+
+## `common.json`
+
+In both the shared documentation repository and the project-specific documentation repositories there is a file called `common.json` in the root of the projects. These files contain variables that are used to dynamically inject variables into the documentation. The `common.json` files in both repositories are merged when there are updates to create the `variables.json` file that is in each project-specific documentation repository. During this process, the variables in the project-specific `common.json` file takes precedence over the variables in the shared `common.json` file.
+
+Then, when an individual project is generating its documentation, the variables in the `"blueprint"` key of the `package.json` file in each individual repository take precedence over the variables in the `variables.json` file which is stored in `./.common/docs/variables.json` in every one of our projects.

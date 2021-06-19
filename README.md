@@ -19,14 +19,6 @@
 - [➤ Requirements](#-repository-pipeline-order)
 - [➤ Flow Summary](#-flow-summary)
 - [➤ `common.json`](#-common-json)
-  - [Optional Requirements](#optional-requirements)
-- [➤ Example Usage](#-example-usage)
-  - [Integrating with GitLab CI](#integrating-with-gitlab-ci)
-  - [Building the Docker Container](#building-the-docker-container)
-  - [Building a Slim Container](#building-a-slim-container)
-  - [Build Tools](#build-tools)
-- [➤ Contributing](#-contributing)
-- [➤ License](#-license)
 
 [![-----------------------------------------------------](https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png)](#-summary)
 
@@ -52,7 +44,7 @@ We currently use this method to scaffold our projects of the following types:
 5. [Packer](https://gitlab.com/megabyte-labs/documentation/packer)
 6. [Python](https://gitlab.com/megabyte-labs/documentation/python)
 
-[![-----------------------------------------------------](https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png)]((#-repository-pipeline-order)
+[![-----------------------------------------------------](https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png)](#-repository-pipeline-order)
 
 ## ➤ Repository Pipeline Order
 

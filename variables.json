@@ -10,6 +10,7 @@
     "help": "help@megabyte.space",
     "personal": "brian@megabyte.space"
   },
+  "github_prefix": "",
   "license": "MIT",
   "link": {
     "chat": "https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/",
@@ -26,11 +27,13 @@
     "tinypng": "https://tinypng.com/"
   },
   "organization": "Megabyte Labs",
+  "prettier_config": "@megabytelabs/prettier-config",
   "profile": {
     "galaxy": "professormanhattan",
     "github": "ProfessorManhattan",
     "linkedin": "blzalewski",
     "npmjs": "thisismyfirstday",
+    "npmjs_organization": "megabytelabs",
     "opencollective": "megabytelabs",
     "patreon": "ProfessorManhattan",
     "pypi": "ProfessorManhattan",

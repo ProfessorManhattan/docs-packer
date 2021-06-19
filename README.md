@@ -7,6 +7,17 @@ There are two repositories responsible for generating the documentation for each
 1. **[Shared documentation repository](https://gitlab.com/megabyte-labs/documentation/shared):** This repository contains documentation partials that are used throughout all of our repositories.
 2. **Project type documentation repository:** This repository is where we store documentation that is specific to the type of project that downstream repository is. For example, if the downstream project is an Ansible role, then the repositories that will be used to generate the documentation will be the shared documentation repository and the [Ansible documentation repository](https://gitlab.com/megabyte-labs/documentation/ansible).
 
+## Repository Types
+
+We currently use this method to scaffold our projects of the following project types:
+
+1. [Angular](https://gitlab.com/megabyte-labs/documentation/angular)
+2. [Ansible](https://gitlab.com/megabyte-labs/documentation/ansible)
+3. [Dockerfile](https://gitlab.com/megabyte-labs/documentation/dockerfile)
+4. [NPM](https://gitlab.com/megabyte-labs/documentation/npm)
+5. [Packer](https://gitlab.com/megabyte-labs/documentation/packer)
+6. [Python](https://gitlab.com/megabyte-labs/documentation/python)
+
 ## Repository Pipeline Order
 
 Whenever a change is made to the shared documentation repository, the pipeline for the project-specific repositories will trigger. Part of that pipeline includes cloning the shared documentation repository into the project-specific repository. When this happens, the `common/` folder in the shared repository is copied over to the project-specific repository.

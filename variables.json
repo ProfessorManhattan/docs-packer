@@ -13,7 +13,7 @@
   "email": {
     "help": "help@megabyte.space"
   },
-  "github_prefix": "packer-",
+  "github_prefix": "",
   "hbs": {
     "ansible": false,
     "dockerfile": false,

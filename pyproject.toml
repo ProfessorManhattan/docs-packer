@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://megabyte.space"
 documentation = "https://megabyte.space/docs/documentation/packer"
-keywords = ["common", "docs", "documentation", "packer", "templates", "vagrant", "vms", "virtual-machine", "virtualbox", "vmware", "parallels", "hyper-v", "kvm", "machine-images", "megabytelabs", "npm", "package", "partials", "professormanhattan", "shared"]
+keywords = ["common", "docs", "documentation", "hyper-v", "kvm", "machine-images", "megabytelabs", "npm", "package", "packer", "parallels", "partials", "professormanhattan", "shared", "templates", "vagrant", "virtual-machine", "virtualbox", "vms", "vmware"]
 include = ["CHANGELOG.md", "LICENSE"]
 
 [tool.poetry.dependencies]

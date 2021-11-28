@@ -1,6 +1,7 @@
 import inquirer from 'inquirer'
-import signale from 'signale'
-import { decorateSystem } from './lib/decorate-system'
+import { execSync } from 'node:child_process'
+import { decorateSystem } from './lib/decorate-system.js'
+import { logInstructions, LOG_DECORATOR_REGEX } from './lib/log.js'
 
 /**
  * Prompts the user for the operating system they wish to launch a shell session with.
@@ -30,20 +31,27 @@ async function promptForShell() {
     }
   ])
 
-  return response.operatingSystem.replace('● ', '').toLowerCase().replace(' ', '-')
+  const DECORATION_LENGTH = 2
+
+  return response.operatingSystem
+    .replace(LOG_DECORATOR_REGEX, '')
+    .toLowerCase()
+    .slice(DECORATION_LENGTH)
+    .replace(' ', '-')
 }
 
 /**
  * Main script logic
  */
 async function run() {
-  signale.info(
+  logInstructions(
+    'Launch Docker Shell Environment',
     'Open a shell session quickly, safely, and easily using Docker.' +
-      'Select an option from the prompt below to download and shell into a Docker environment.'
+      'Select an option from the prompt below to download and shell into a Docker environment.' +
+      ' The environment will be automatically deleted after you exit the terminal session.'
   )
   const choice = await promptForShell()
-  // eslint-disable-next-line no-console
-  console.log(choice)
+  execSync(`task common:shell:cli -- ${choice}`, { stdio: 'inherit' })
 }
 
 run()

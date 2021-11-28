@@ -3,8 +3,8 @@
 import inquirer from 'inquirer'
 import { execSync } from 'node:child_process'
 import { readdirSync } from 'node:fs'
-import signale from 'signale'
-import { decorateSystem } from './lib/decorate-system'
+import { decorateSystem } from './lib/decorate-system.js'
+import { logInstructions, LOG_DECORATOR_REGEX } from './lib/log.js'
 
 const platformMap = {
   'Hyper-V': 'hyperv',
@@ -128,7 +128,9 @@ async function promptForDesktop() {
     }
   ])
 
-  return response.operatingSystem.replace('● ', '').toLowerCase()
+  const DECORATION_LENGTH = 2
+
+  return response.operatingSystem.replace(LOG_DECORATOR_REGEX, '').toLowerCase().slice(DECORATION_LENGTH)
 }
 
 /**
@@ -180,14 +182,17 @@ async function promptForPlatform() {
  * Main script logic
  */
 async function run() {
-  signale.info(
+  logInstructions(
+    'Launch VM via Vagrant',
     'Use the following prompts to select the type of operating system and' +
-      ' the virtualization platform you wish to use with Vagrant.'
+      ' the virtualization platform you wish to use with Vagrant. After you make your choice' +
+      ' the corresponding environment will be provisioned with Vagrant.'
   )
   const operatingSystem = await promptForDesktop()
   const virtualizationPlatform = await promptForPlatform()
-  // eslint-disable-next-line no-console
-  console.log(`--provider=${virtualizationPlatform} ${operatingSystem}`)
+  execSync(`task ansible:test:vagrant:cli -- --provider=${virtualizationPlatform} ${operatingSystem}`, {
+    stdio: 'inherit'
+  })
 }
 
 run()

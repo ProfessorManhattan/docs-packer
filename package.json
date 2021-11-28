@@ -1,5 +1,5 @@
 {
-  "private": "false",
+  "private": false,
   "name": "@mblabs/docs-packer",
   "version": "0.0.1",
   "description": "Documentation partials used to generate documentation for Packer projects",
@@ -28,13 +28,20 @@
   "dependencies": {
     "tslib": "^2.3.1"
   },
+  "optionalDependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.0",
+    "signale": "^1.4.0"
+  },
   "devDependencies": {
     "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.0",
+    "@mblabs/eslint-config": "^1.0.97",
     "@mblabs/prettier-config": "^14.14.14",
+    "@mblabs/release-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "handlebars-helpers": "^0.10.0"
+    "handlebars-helpers": "^0.10.0",
+    "semantic-release": "^18.0.0"
   },
   "keywords": [
     "common",
@@ -43,6 +50,7 @@
     "hyper-v",
     "kvm",
     "machine-images",
+    "mblabs",
     "megabytelabs",
     "npm",
     "package",
@@ -135,9 +143,11 @@
     ]
   },
   "prettier": "@mblabs/prettier-config",
-  "standard-version": {
-    "scripts": {
-      "prerelease": "git add --all"
-    }
+  "release": {
+    "branches": [
+      "master",
+      "next"
+    ],
+    "extends": "@mblabs/release-config"
   }
 }

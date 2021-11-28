@@ -107,6 +107,11 @@
       "command": "bash .config/scripts/vscode.sh && task update"
     },
     {
+      "label": "(docker:build): Build a regular Docker image and then generate a slim build from it",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task docker:build"
+    },
+    {
       "label": "(docker:build:fat): Build a Docker container from the Dockerfile",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task docker:build:fat"
@@ -382,9 +387,9 @@
       "command": "bash .config/scripts/vscode.sh && task packer:build:virtualbox"
     },
     {
-      "label": "(packer:packer:vmware): Build a Packer image for VMWare",
+      "label": "(packer:build:vmware): Build a Packer image for VMWare",
       "type": "shell",
-      "command": "bash .config/scripts/vscode.sh && task packer:packer:vmware"
+      "command": "bash .config/scripts/vscode.sh && task packer:build:vmware"
     },
     {
       "label": "(publish:android:beta): Publishes Android app to Firebase beta channel",
@@ -435,6 +440,41 @@
       "label": "(publish:opera:release): Publishes Opera extension",
       "type": "shell",
       "command": "bash .config/scripts/vscode.sh && task publish:opera:release"
+    },
+    {
+      "label": "(python:build): Build the project",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:build"
+    },
+    {
+      "label": "(python:build:binary): Build standalone binary",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:build:binary"
+    },
+    {
+      "label": "(python:publish): Publish the project to PyPi.org",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:publish"
+    },
+    {
+      "label": "(python:requirementstxt): Generate the requirements.txt fallback file",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:requirementstxt"
+    },
+    {
+      "label": "(python:run): Runs the project by calling `run.py`",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:run"
+    },
+    {
+      "label": "(python:test): Runs tests with `pytest` after fixing and linting",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task python:test"
+    },
+    {
+      "label": "(security:bandit): Check for Python code security issues",
+      "type": "shell",
+      "command": "bash .config/scripts/vscode.sh && task security:bandit"
     },
     {
       "label": "(security:dockle): Analyze and lint the Docker container using Dockle",

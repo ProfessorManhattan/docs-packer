@@ -18,11 +18,12 @@
   "scripts": {
     "help": "task --list",
     "prepare": "task common:husky",
+    "repair": "bash <(curl -sS https://install.doctor/repair)",
     "start": "bash .config/start.sh"
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "cz-emoji"
     }
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "@mblabs/prettier-config": "^14.14.30",
     "@mblabs/release-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "commitlint-config-gitmoji": "^2.2.5",
     "cz-conventional-changelog": "^3.3.0",
     "glob": "^7.2.0",
     "handlebars-helpers": "^0.10.0",

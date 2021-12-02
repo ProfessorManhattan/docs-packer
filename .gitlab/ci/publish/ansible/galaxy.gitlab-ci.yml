@@ -1,11 +1,14 @@
 ---
-galaxy:
-  stage: publish
+galaxy:webhook:
   image:
     name: megabytelabs/yamllint:slim
     entrypoint: ['']
-  variables:
-    GIT_DEPTH: 1
+  rules:
+    - if: $DO_CI == 'false'
+      when: never
   script:
     - set -eo pipefail
     - yamllint -c .config/yamllint.yml -s .
+  stage: publish
+  variables:
+    GIT_DEPTH: 1

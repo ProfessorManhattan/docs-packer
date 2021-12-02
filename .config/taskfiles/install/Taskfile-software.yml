@@ -2,6 +2,13 @@
 version: '3'
 
 tasks:
+  act:
+    run: once
+    cmds:
+      - task: brew:formulae
+        vars:
+          FORMULAE: act
+
   brew:
     deps:
       - common
@@ -48,7 +55,7 @@ tasks:
     cmds:
       - |
         function ensureSource() {
-          if ! (cat "$1" | grep "/bin/brew shellenv" &> /dev/null); then
+          if ! (grep "/bin/brew shellenv" < cat "$1" &> /dev/null); then
             echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> "$1"
           fi
         }

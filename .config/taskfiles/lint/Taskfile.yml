@@ -3,10 +3,10 @@ version: '3'
 
 vars:
   ANSIBLE_LINT_CONFIG: .config/ansible-lint.yml
-  COMMITLINT_CONFIG: .config/commitlint.config.cjs
-  CSPELL_CONFIG: .config/.cspell.json
+  CSPELL_CONFIG: .config/cspell.json
   FLAKE8_CONFIG: .config/flake8.toml
   PRETTIERIGNORE_CONFIG: .config/prettierignore
+  SHELLCHECK_EXCLUDE: SC1091
   YAMLLINT_CONFIG: .config/yamllint.yml
 
 tasks:
@@ -53,7 +53,15 @@ tasks:
       **Example:**
       `task lint:commit -- 'My commit message'`
     cmds:
-      - if [ ! -z '{{.CLI_ARGS}}' ]; then commitlint -e '{{.CLI_ARGS}}' --config {{.COMMITLINT_CONFIG}}; fi
+      - |
+        if [ ! -z '{{.CLI_ARGS}}' ] && [ '{{.CLI_ARGS}}' != '.git/MERGE_MSG' ]; then
+          cp '{{.CLI_ARGS}}' '{{.CLI_ARGS}}.bak'
+          TMP="$(mktemp)"
+          COMMIT_MSG_NOEMOJI="$(sed 's/^..//' < '{{.CLI_ARGS}}')"
+          echo "$COMMIT_MSG_NOEMOJI" | {{.NPX_PACKAGE}} commitlint
+        elif [ '{{.CLI_ARGS}}' == '.git/MERGE_MSG' ]; then
+          .config/log info 'Bypassing commitlint since the message is a merge message'
+        fi
     status:
       - '[[ -z "{{.CLI_ARGS}}" ]]'
     preconditions:
@@ -67,7 +75,7 @@ tasks:
     summary: |
       # Lint Dockerfiles using Hadolint
 
-      Hadolint is a linter for Dockerfiles. This task uses Hadolint to reportrue warnings
+      Hadolint is a linter for Dockerfiles. This task uses Hadolint to report warnings
       and suggestions so that the project is using best practices and is less likely to
       have errors. The task uses Docker to run an ultra-compact container that includes
       Hadolint. Installing Hadolint is done at runtime. The task scans for all files that
@@ -130,7 +138,7 @@ tasks:
       - :install:modules:local
       - :install:npm:eslint
     cmds:
-      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --ext .js,.jsx,.ts --cache
+      - '{{.NPX_HANDLE}}eslint -c package.json --no-eslintrc --format pretty --ext .js,.jsx,.ts,.tsx --cache
         --cache-location .cache/eslintcache {{if .CLI_ARGS}}{{.CLI_ARGS}}{{else}}.{{end}}'
 
   lint-staged:
@@ -254,9 +262,10 @@ tasks:
     cmds:
       - |
         {{if .CLI_ARGS}}
-          {{.NPX_HANDLE}}shellcheck {{.CLI_ARGS}}
+          {{.NPX_HANDLE}}shellcheck -e {{.SHELLCHECK_EXCLUDE}} {{.CLI_ARGS}}
         {{else}}
-          find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.sh' -o -name '*.sh.j2' \) -print0 | xargs -0 -r -n1 {{.NPX_HANDLE}}shellcheck
+          find . -type d \( {{.IGNORE_FOLDERS}} \) -prune -o -type f \( -name '*.sh' -o -name '*.sh.j2' \) \
+          -print0 | xargs -0 -r -n1 {{.NPX_HANDLE}}shellcheck -e {{.SHELLCHECK_EXCLUDE}}
         {{end}}
 
   spelling:
@@ -266,7 +275,7 @@ tasks:
     summary: |
       # Check for spelling errors in staged files
 
-      Use cspell to check for possible spelling errors using the configuration stored in `.common/.cspell.json`.
+      Use cspell to check for possible spelling errors using the configuration stored in `.config/cspell.json`.
 
       This task is utilized by the pre-commit hook. For more information about cspell, see the
       [cspell NPM page](https://www.npmjs.com/package/cspell).
@@ -292,11 +301,10 @@ tasks:
     deps:
       - :install:npm:cspell
       - :install:software:git
-    env:
-      STAGED_FILES: git diff --cached --name-only
     cmds:
       - cmd: |
-          if [ '{{.STAGED_FILES}}' ]; then
+          STAGED_FILES="$(git diff --cached --name-only)"
+          if [ -n "$STAGED_FILES" ]; then
             {{.NPX_HANDLE}}cspell --no-summary --no-progress --show-context --no-must-find-files --config {{.CSPELL_CONFIG}} "$STAGED_FILES"
           fi
         ignore_errors: true

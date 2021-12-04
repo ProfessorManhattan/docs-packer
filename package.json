@@ -1,18 +1,18 @@
 {
   "private": false,
-  "name": "@mblabs/docs-packer",
+  "name": "@installdoc/common-shared",
   "version": "0.0.1",
-  "description": "Documentation partials used to generate documentation for Packer projects",
+  "description": "Includes common files used across different types of common file repositories (e.g. Go, Python, TypeScript, Go, more..)",
   "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
   "homepage": "https://megabyte.space",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ProfessorManhattan/docs-packer.git"
+    "url": "git+https://github.com/ProfessorManhattan/common-shared.git"
   },
   "bugs": {
     "email": "help@megabyte.space",
-    "url": "https://gitlab.com/megabyte-labs/documentation/packer/-/issues"
+    "url": "https://gitlab.com/megabyte-labs/common/shared/-/issues"
   },
   "type": "module",
   "scripts": {
@@ -23,52 +23,23 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-emoji"
+      "path": "node_modules/cz-emoji-conventional"
     }
   },
-  "dependencies": {
-    "tslib": "^2.3.1"
-  },
-  "optionalDependencies": {
-    "chalk": "^4.1.2",
-    "inquirer": "^8.2.0",
-    "signale": "^1.4.0",
-    "string-break": "^1.2.0"
-  },
+  "dependencies": {},
+  "optionalDependencies": {},
   "devDependencies": {
-    "@commitlint/config-conventional": "^13.1.0",
-    "@mblabs/eslint-config": "^1.0.114",
-    "@mblabs/prettier-config": "^14.14.30",
-    "@mblabs/release-config": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "commitlint-config-gitmoji": "^2.2.5",
-    "cz-conventional-changelog": "^3.3.0",
-    "glob": "^7.2.0",
-    "handlebars-helpers": "^0.10.0",
-    "semantic-release": "^18.0.0"
+    "@washingtondc/development": "^1.0.2",
+    "@washingtondc/prettier": "^1.0.0",
+    "@washingtondc/release": "^0.0.2",
+    "eslint-config-strict-mode": "^1.0.0",
+    "sleekfast": "^0.0.1"
   },
   "keywords": [
-    "common",
-    "docs",
-    "documentation",
-    "hyper-v",
-    "kvm",
-    "machine-images",
     "mblabs",
     "megabytelabs",
-    "npm",
-    "package",
-    "packer",
-    "parallels",
-    "partials",
     "professormanhattan",
-    "shared",
-    "templates",
-    "vagrant",
-    "virtual-machine",
-    "virtualbox",
-    "vms",
-    "vmware"
+    "washingtondc"
   ],
   "engines": {
     "node": ">=14.18.0"
@@ -77,23 +48,27 @@
     "access": "public"
   },
   "blueprint": {
-    "description": "Documentation partials used to generate documentation for Packer projects",
-    "docs": {
-      "link": "https://megabyte.space/docs/documentation/packer"
-    },
-    "group": "documentation",
-    "name": "Packer Documentation",
-    "overview": "This repository contains documentation partials used to generate documentation for Packer projects. It uses the partials in conjunction with customizable variables to generate unique, useful documentation that follow the same format for various types of Packer projects. When this project is updated, the changes are propagated to the [Packer common files repository](https://gitlab.com/megabyte-labs/common/packer). From there, common files and documentation are propagated to individual Packer projects. By using this CI workflow, we are able to keep documentation, configurations, and common files up-to-date from a central location.",
+    "description": "An NPM package that is part of the Megabyte Labs eco-system",
+    "name": "My Project Name",
+    "overview": "This text shows up at the top of the README.md.",
     "repository": {
-      "github": "https://github.com/ProfessorManhattan/docs-packer",
-      "gitlab": "https://gitlab.com/megabyte-labs/documentation/packer"
+      "github": "https://github.com/ProfessorManhattan/common-shared",
+      "gitlab": "https://gitlab.com/megabyte-labs/common/shared"
     },
-    "slug": "docs-packer",
-    "subgroup": "packer",
-    "title": "Packer Project Documentation Partials"
+    "slug": "my-project",
+    "title": "Title of the README.md"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "eslintConfig": {
-    "extends": "@mblabs/eslint-config"
+    "extends": "eslint-config-strict-mode",
+    "rules": {
+      "import/no-extraneous-dependencies": "off"
+    }
   },
   "funding": [
     {
@@ -127,7 +102,6 @@
       "task fix:json --"
     ],
     "**/*.sh": [
-      "task fix:shell --",
       "task lint:shell --"
     ],
     "**/*.toml": [
@@ -146,12 +120,12 @@
       "task image:compress --"
     ]
   },
-  "prettier": "@mblabs/prettier-config",
+  "prettier": "@washingtondc/prettier",
   "release": {
     "branches": [
       "master",
       "next"
     ],
-    "extends": "@mblabs/release-config"
+    "extends": "@washingtondc/release"
   }
 }

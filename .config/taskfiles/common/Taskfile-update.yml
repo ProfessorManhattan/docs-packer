@@ -7,14 +7,19 @@ tasks:
       - ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:descriptions{{else}}donothing{{end}}'
       - files
       - :git:remotes
+      - :install:tslib
       - :python:requirementstxt
     cmds:
       - task: all:docs
 
   all:docs:
-    deps:
-      - contributing
-      - readme
+    cmds:
+      - |
+        {{if eq .REPOSITORY_TYPE "common"}}{{else}}{{if eq .REPOSITORY_TYPE "documentation"}}{{else}}
+        task common:update:contributing &
+        task common:update:readme &
+        wait
+        {{end}}{{end}}
 
   ansible:
     deps:
@@ -181,19 +186,9 @@ tasks:
       - task: project
 
   services:
-    deps:
-      - update
-    label: update:services
-    desc: Update elements of the repository that require API access
-    summary: |
-      # Update elements of the repository that require API access
-
-      This task will ensure that the git repositories and other services related to the
-      project are updated with the configurations.
-
-      **Example usage:**
-      `task common:update:services`
     cmds:
+      - task: :{{if eq .REPOSITORY_TYPE "project"}}donothing{{else}}start{{end}}
+      - task: update
       - task: services:repos
 
   services:repos:
@@ -252,7 +247,7 @@ tasks:
           INPUT_FILE: .config/variables.json
           OUTPUT_FILE: .variables.json
       - task: ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:variables{{else}}donothing{{end}}'
-      - task: ':{{if eq .REPOSITORY_SUBTYPE "role"}}ansible:update:variables{{else}}donothing{{end}}'
+      - task: ':{{if eq .REPOSITORY_TYPE "ansible"}}ansible:update:variables{{if eq .REPOSITORY_SUBTYPE "playbook"}}:playbook{{end}}{{else}}donothing{{end}}'
     sources:
       - .config/variables.json
       - package.json

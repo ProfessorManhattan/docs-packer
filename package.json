@@ -1,25 +1,30 @@
 {
-  "private": false,
-  "name": "@installdoc/common-shared",
-  "version": "0.0.1",
-  "description": "Includes common files used across different types of common file repositories (e.g. Go, Python, TypeScript, Go, more..)",
-  "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
-  "homepage": "https://megabyte.space",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ProfessorManhattan/common-shared.git"
+  "blueprint": {
+    "description": "Collection of documentation partials used to generate Packer project documentation",
+    "github_id": "R_kgDOGemPUg",
+    "gitlab_group_id": "11097242",
+    "gitlab_project_id": "24729680",
+    "name": "Packer Docs",
+    "overview": "This repository contains files documentation partials that are shared between various Packer projects. The projects include both build configurations for desktops and servers.",
+    "repository": {
+      "github": "https://github.com/ProfessorManhattan/docs-packer",
+      "gitlab": "https://gitlab.com/megabyte-labs/documentation/packer"
+    },
+    "slug": "docs-packer",
+    "group": "documentation",
+    "subgroup": "packer",
+    "title": "Packer Documentation"
   },
   "bugs": {
     "email": "help@megabyte.space",
-    "url": "https://gitlab.com/megabyte-labs/common/shared/-/issues"
+    "url": "https://gitlab.com/megabyte-labs/documentation/packer/-/issues"
   },
-  "type": "module",
-  "scripts": {
-    "help": "task --list",
-    "prepare": "task common:husky",
-    "repair": "bash <(curl -sS https://install.doctor/repair)",
-    "start": "bash .config/start.sh"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "config": {
     "commitizen": {
@@ -27,7 +32,7 @@
     }
   },
   "dependencies": {},
-  "optionalDependencies": {},
+  "description": "Collection of documentation partials used to generate Packer project documentation",
   "devDependencies": {
     "@washingtondc/development": "^1.0.2",
     "@washingtondc/prettier": "^1.0.0",
@@ -35,34 +40,8 @@
     "eslint-config-strict-mode": "^1.0.0",
     "sleekfast": "^0.0.1"
   },
-  "keywords": [
-    "mblabs",
-    "megabytelabs",
-    "professormanhattan",
-    "washingtondc"
-  ],
   "engines": {
     "node": ">=14.18.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "blueprint": {
-    "description": "An NPM package that is part of the Megabyte Labs eco-system",
-    "name": "My Project Name",
-    "overview": "This text shows up at the top of the README.md.",
-    "repository": {
-      "github": "https://github.com/ProfessorManhattan/common-shared",
-      "gitlab": "https://gitlab.com/megabyte-labs/common/shared"
-    },
-    "slug": "my-project",
-    "title": "Title of the README.md"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "eslintConfig": {
     "extends": "eslint-config-strict-mode",
@@ -80,6 +59,14 @@
       "url": "https://www.patreon.com/ProfessorManhattan"
     }
   ],
+  "homepage": "https://megabyte.space",
+  "keywords": [
+    "mblabs",
+    "megabytelabs",
+    "professormanhattan",
+    "washingtondc"
+  ],
+  "license": "MIT",
   "lint-staged": {
     "**/*": [
       "blocklint --wordlist blacklist,slave,whitelist",
@@ -120,12 +107,30 @@
       "task image:compress --"
     ]
   },
+  "name": "@mblabs/docs-packer",
+  "optionalDependencies": {},
   "prettier": "@washingtondc/prettier",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "release": {
     "branches": [
       "master",
       "next"
     ],
     "extends": "@washingtondc/release"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProfessorManhattan/docs-packer.git"
+  },
+  "scripts": {
+    "help": "task --list",
+    "prepare": "task common:husky",
+    "repair": "bash <(curl -sS https://install.doctor/repair)",
+    "start": "bash .config/start.sh"
+  },
+  "type": "module",
+  "version": "0.0.1"
 }

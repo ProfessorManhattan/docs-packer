@@ -49,9 +49,9 @@
   },
   "blueprint": {
     "description": "Collection of documentation partials used to generate Packer project documentation",
-    "github_id": "R_kgDOGemPUg",
-    "gitlab_group_id": "11097242",
-    "gitlab_project_id": "24729680",
+    "github_id": "R_kgDOGes_-A",
+    "gitlab_group_id": "11096751",
+    "gitlab_project_id": "24794871",
     "group": "documentation",
     "name": "Packer Docs",
     "overview": "This repository contains files documentation partials that are shared between various Packer projects. The projects include both build configurations for desktops and servers.",

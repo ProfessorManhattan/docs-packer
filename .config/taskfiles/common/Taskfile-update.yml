@@ -145,7 +145,6 @@ tasks:
   modules:
     deps:
       - :install:software:git
-    label: update:modules
     summary: |
       # Ensure all submodules in `.modules/` are updated
 
@@ -180,6 +179,8 @@ tasks:
           git pull origin master --no-rebase || true
         fi
 
+    log:
+      start: Pulling `master` if `origin` is defined
   readme:
     deps:
       - ':{{if eq .REPOSITORY_TYPE "ansible"}}ansible:collection-dependencies:markdown{{else}}donothing{{end}}'
@@ -197,7 +198,10 @@ tasks:
           SCRUB_FILE: README.md
       - task: ':{{if eq .REPOSITORY_TYPE "packer"}}packer:update:readme{{else}}donothing{{end}}'
       - '{{.NPX_HANDLE}}prettier --write README.md > /dev/null'
-      - .config/log success 'Generated README.md successfully'
+    log:
+      error: Error encountered while generating `README.md`
+      start: Generating `README.md`
+      success: Generated README.md successfully
     sources:
       - .autodoc/*
       - .config/docs/**/*
@@ -235,7 +239,6 @@ tasks:
       - ':{{if eq .REPOSITORY_TYPE "packer"}}packer:latestos{{else}}donothing{{end}}'
       - init
       - repositories
-    label: update
     summary: |
       # Refresh project with latest upstream code and ensure project files are up-to-date
 

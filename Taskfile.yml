@@ -31,9 +31,6 @@ includes:
   install:python: ./.config/taskfiles/install/Taskfile-python.yml
   install:software: ./.config/taskfiles/install/Taskfile-software.yml
   lint: ./.config/taskfiles/lint/Taskfile.yml
-  project:
-    taskfile: Taskfile-project.yml
-    optional: true
   lint:esprint: ./.config/taskfiles/lint/Taskfile-esprint.yml
   lint:markdown: ./.config/taskfiles/lint/Taskfile-markdown.yml
   lint:prose: ./.config/taskfiles/lint/Taskfile-prose.yml
@@ -44,6 +41,9 @@ includes:
   packer: ./.config/taskfiles/packer/Taskfile.yml
   packer:build: ./.config/taskfiles/packer/Taskfile-build.yml
   packer:update: ./.config/taskfiles/packer/Taskfile-update.yml
+  project:
+    taskfile: Taskfile-project.yml
+    optional: true
   publish: ./.config/taskfiles/publish/Taskfile.yml
   publish:android: ./.config/taskfiles/publish/Taskfile-android.yml
   publish:brew: ./.config/taskfiles/publish/Taskfile-brew.yml

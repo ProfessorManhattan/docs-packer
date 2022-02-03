@@ -20,9 +20,6 @@ includes:
   fix: ./.config/taskfiles/fix/Taskfile.yml
   git: ./.config/taskfiles/git/Taskfile.yml
   git:github: ./.config/taskfiles/git/Taskfile-github.yml
-  project:
-    taskfile: Taskfile-project.yml
-    optional: true
   git:gitlab: ./.config/taskfiles/git/Taskfile-gitlab.yml
   git:hook: ./.config/taskfiles/git/Taskfile-hook.yml
   go: ./.config/taskfiles/go/Taskfile.yml
@@ -33,6 +30,9 @@ includes:
   install:go: ./.config/taskfiles/install/Taskfile-go.yml
   install:npm: ./.config/taskfiles/install/Taskfile-npm.yml
   install:python: ./.config/taskfiles/install/Taskfile-python.yml
+  project:
+    taskfile: Taskfile-project.yml
+    optional: true
   install:software: ./.config/taskfiles/install/Taskfile-software.yml
   lint: ./.config/taskfiles/lint/Taskfile.yml
   lint:esprint: ./.config/taskfiles/lint/Taskfile-esprint.yml

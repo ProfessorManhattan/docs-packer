@@ -62,7 +62,12 @@ tasks:
       start: Installing local NPM dependencies
       success: Successfully installed local NPM dependencies
     cmds:
-      - cmd: '{{.NPM_PROGRAM_LOCAL}} update'
+      - cmd: |
+          if [ -n "$GITLAB_CI" ] && [ "$AUTO_UPDATE_NPM_PACKAGES" == 'true' ]; then
+            {{.NPM_PROGRAM_LOCAL}} update
+          else
+            {{.NPM_PROGRAM_LOCAL}} install
+          fi
         ignore_error: true
       - task: modules:local:sync
     sources:

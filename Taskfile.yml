@@ -30,9 +30,6 @@ includes:
   install:go: ./.config/taskfiles/install/Taskfile-go.yml
   install:npm: ./.config/taskfiles/install/Taskfile-npm.yml
   install:python: ./.config/taskfiles/install/Taskfile-python.yml
-  project:
-    taskfile: Taskfile-project.yml
-    optional: true
   install:software: ./.config/taskfiles/install/Taskfile-software.yml
   lint: ./.config/taskfiles/lint/Taskfile.yml
   lint:esprint: ./.config/taskfiles/lint/Taskfile-esprint.yml
@@ -43,6 +40,9 @@ includes:
   npm: ./.config/taskfiles/npm/Taskfile.yml
   npm:cov: ./.config/taskfiles/npm/Taskfile-cov.yml
   npm:doc: ./.config/taskfiles/npm/Taskfile-doc.yml
+  project:
+    taskfile: Taskfile-project.yml
+    optional: true
   packer: ./.config/taskfiles/packer/Taskfile.yml
   packer:build: ./.config/taskfiles/packer/Taskfile-build.yml
   packer:update: ./.config/taskfiles/packer/Taskfile-update.yml

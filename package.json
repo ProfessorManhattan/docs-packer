@@ -1,61 +1,5 @@
 {
-  "private": false,
-  "name": "@installdoc/docs-packer",
-  "version": "0.0.1",
-  "description": "Collection of documentation partials used to generate Packer project documentation",
-  "license": "MIT",
   "author": "Brian Zalewski <brian@megabyte.space> (https://megabyte.space)",
-  "homepage": "https://megabyte.space",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ProfessorManhattan/docs-packer.git"
-  },
-  "bugs": {
-    "email": "help@megabyte.space",
-    "url": "https://gitlab.com/megabyte-labs/documentation/packer/-/issues"
-  },
-  "type": "module",
-  "scripts": {
-    "build": "task donothing",
-    "bump": "npm run build && npm version patch --no-commit-hooks --no-git-tag-version --force && npm publish",
-    "help": "task --menu",
-    "prepare": "npm run start && (test -f Taskfile.yml && task common:husky) || true",
-    "repair": "bash <(curl -sS https://install.doctor/repair)",
-    "start": "bash start.sh",
-    "test": "task donothing"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/git-cz-emoji"
-    }
-  },
-  "dependencies": {},
-  "optionalDependencies": {},
-  "devDependencies": {
-    "@commitlint/config-conventional": "^16.0.0",
-    "@washingtondc/development": "latest",
-    "cz-emoji-conventional": "^1.0.1",
-    "eslint-config-strict-mode": "latest",
-    "git-cz-emoji": "latest",
-    "glob": "^7.2.0",
-    "handlebars-helpers": "^0.10.0",
-    "prettier-config-sexy-mode": "latest",
-    "semantic-release-config": "latest",
-    "typescript": "^4.5.5"
-  },
-  "keywords": [
-    "mblabs",
-    "megabytelabs",
-    "professormanhattan",
-    "washingtondc"
-  ],
-  "engines": {
-    "node": ">=14.18.0"
-  },
-  "publishConfig": {
-    "@megabyte:registry": "https://gitlab.com/api/v4/projects/24794871/packages/npm/",
-    "access": "public"
-  },
   "blueprint": {
     "description": "Collection of documentation partials used to generate Packer project documentation",
     "github_id": "R_kgDOGes_-A",
@@ -75,6 +19,10 @@
     "subgroup": "packer",
     "title": "Packer Documentation"
   },
+  "bugs": {
+    "email": "help@megabyte.space",
+    "url": "https://gitlab.com/megabyte-labs/documentation/packer/-/issues"
+  },
   "changelog": {
     "displayTypes": [
       "feat",
@@ -90,6 +38,28 @@
       "@commitlint/config-conventional"
     ],
     "helpUrl": "https://megabyte.space/docs/contributing/commits"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/git-cz-emoji"
+    }
+  },
+  "dependencies": {},
+  "description": "Collection of documentation partials used to generate Packer project documentation",
+  "devDependencies": {
+    "@commitlint/config-conventional": "^16.0.0",
+    "@washingtondc/development": "latest",
+    "cz-emoji-conventional": "^1.0.1",
+    "eslint-config-strict-mode": "latest",
+    "git-cz-emoji": "latest",
+    "glob": "^7.2.0",
+    "handlebars-helpers": "^0.10.0",
+    "prettier-config-sexy-mode": "latest",
+    "semantic-release-config": "latest",
+    "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": ">=14.18.0"
   },
   "eslintConfig": {
     "extends": "eslint-config-strict-mode",
@@ -109,6 +79,14 @@
       "url": "https://www.patreon.com/ProfessorManhattan"
     }
   ],
+  "homepage": "https://megabyte.space",
+  "keywords": [
+    "mblabs",
+    "megabytelabs",
+    "professormanhattan",
+    "washingtondc"
+  ],
+  "license": "MIT",
   "lint-staged": {
     "(.dockerignore|.editorconfig|.eslintignore|.gitattributes|.gitconfig|.gitignore|.gitmodules|.nodemonignore|.npmignore|.prettierignore)": [
       "task fix:prettier --"
@@ -192,6 +170,7 @@
       "task image:compress --"
     ]
   },
+  "name": "@installdoc/docs-packer",
   "ntl": {
     "descriptions": {
       "build": "Builds the project using the build command specified under scripts in package.json",
@@ -203,6 +182,7 @@
       "test": "Runs the appropriate test logic by running the test command defined under scripts in package.json"
     }
   },
+  "optionalDependencies": {},
   "pnpm": {
     "allowedVersions": {
       "@typescript-eslint/eslint-plugin": "5",
@@ -222,6 +202,11 @@
     }
   },
   "prettier": "prettier-config-sexy-mode",
+  "private": false,
+  "publishConfig": {
+    "@megabyte:registry": "https://gitlab.com/api/v4/projects/24794871/packages/npm/",
+    "access": "public"
+  },
   "release": {
     "branches": [
       "main",
@@ -237,5 +222,20 @@
       }
     ],
     "extends": "semantic-release-config"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProfessorManhattan/docs-packer.git"
+  },
+  "scripts": {
+    "build": "task donothing",
+    "bump": "npm run build && npm version patch --no-commit-hooks --no-git-tag-version --force && npm publish",
+    "help": "task --menu",
+    "prepare": "npm run start && (test -f Taskfile.yml && task common:husky) || true",
+    "repair": "bash <(curl -sS https://install.doctor/repair)",
+    "start": "bash start.sh",
+    "test": "task donothing"
+  },
+  "type": "module",
+  "version": "0.0.1"
 }

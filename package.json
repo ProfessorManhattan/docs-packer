@@ -34,9 +34,7 @@
     "showAuthor": true
   },
   "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
+    "extends": [],
     "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "config": {
@@ -47,13 +45,13 @@
   "dependencies": {},
   "description": "Collection of documentation partials used to generate Packer project documentation",
   "devDependencies": {
-    "@commitlint/config-conventional": "latest",
     "eslint-config-strict-mode": "latest",
     "git-cz-emoji": "latest",
-    "handlebars-helpers": "latest",
     "prettier-config-sexy-mode": "latest",
     "semantic-release-config": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "@commitlint/config-conventional": "latest",
+    "handlebars-helpers": "latest"
   },
   "engines": {
     "node": ">=14.18.0"

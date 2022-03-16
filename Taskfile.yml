@@ -16,6 +16,7 @@ includes:
   common: ./.config/taskfiles/common/Taskfile.yml
   common:code: ./.config/taskfiles/common/Taskfile-code.yml
   common:update: ./.config/taskfiles/common/Taskfile-update.yml
+  common:util: ./.config/taskfiles/common/Taskfile-util.yml
   docker: ./.config/taskfiles/docker/Taskfile.yml
   docker:build: ./.config/taskfiles/docker/Taskfile-build.yml
   docker:test: ./.config/taskfiles/docker/Taskfile-test.yml
@@ -35,6 +36,7 @@ includes:
   install:github: ./.config/taskfiles/install/Taskfile-github.yml
   install:go: ./.config/taskfiles/install/Taskfile-go.yml
   install:npm: ./.config/taskfiles/install/Taskfile-npm.yml
+  install:pipx: ./.config/taskfiles/install/Taskfile-pipx.yml
   install:python: ./.config/taskfiles/install/Taskfile-python.yml
   install:rust: ./.config/taskfiles/install/Taskfile-rust.yml
   install:software: ./.config/taskfiles/install/Taskfile-software.yml
@@ -80,8 +82,6 @@ includes:
   web:ionic: ./.config/taskfiles/web/Taskfile-ionic.yml
   web:nx: ./.config/taskfiles/web/Taskfile-nx.yml
   web:profile: ./.config/taskfiles/web/Taskfile-profile.yml
-  common:util: ./.config/taskfiles/common/Taskfile-util.yml
-  install:pipx: ./.config/taskfiles/install/Taskfile-pipx.yml
 output: interleaved
 vars:
   DOCKERHUB_PROFILE: megabytelabs
@@ -134,10 +134,8 @@ vars:
   # yamllint enable rule:line-length
   PYTHON_HANDLE: 'poetry run '
   PYTHON_VIRTUALENV: true
-  REPOSITORY_SUBTYPE:
-    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.subgroup package.json)"; if [ "$VER" == null ]; then echo "documentation"; else echo "$VER"; fi; else echo "documentation"; fi
-  REPOSITORY_TYPE:
-    sh: if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r .blueprint.group package.json)"; if [ "$VER" == null ]; then echo "documentation"; else echo "$VER"; fi; else echo "documentation"; fi
+  REPOSITORY_SUBTYPE: packer
+  REPOSITORY_TYPE: documentation
   SEMANTIC_CONFIG: semantic-release-config
   TIMEZONE: America/New_York
 env:

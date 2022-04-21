@@ -24,6 +24,7 @@ build/
 *.code-workspace
 .com.apple.timemachine.donotpresent
 common-shared/
+.config/dummy.go
 .config-old/
 connect.lock
 *.cover
@@ -110,3 +111,4 @@ venv.bak/
 !.vscode/settings.json
 !.vscode/tasks.json
 yarn-error.log
+.yubi.json

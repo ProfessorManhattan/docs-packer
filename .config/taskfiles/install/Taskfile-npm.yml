@@ -17,6 +17,13 @@ tasks:
           BIN_NAME: bw
           PACKAGE: '@bitwarden/cli'
 
+  browserslist:
+    run: once
+    cmds:
+      - task: install:npm
+        vars:
+          PACKAGE: browserslist
+
   bundle:
     cmds:
       - task: :install:modules:global
@@ -55,6 +62,14 @@ tasks:
           PACKAGE: '@commitlint/cli'
     status:
       - '[ -n "$CI" ]'
+
+  crowdin:
+    run: once
+    cmds:
+      - task: install:npm
+        vars:
+          BIN_NAME: crowdin
+          PACKAGE: '@crowdin/cli'
 
   cspell:
     run: once

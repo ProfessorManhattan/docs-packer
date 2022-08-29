@@ -67,8 +67,10 @@ node_modules.bak/
 nosetests.xml
 .nox/
 .npm/
+.npmrc
 npm-debug.log
 .nyc_output/
+persistence/
 pip-delete-this-directory.txt
 pip-log.txt
 .pnpm-store/
@@ -114,3 +116,4 @@ venv.bak/
 !.vscode/tasks.json
 yarn-error.log
 .yubi.json
+.yubi-masterkey

@@ -38,15 +38,21 @@
     }
   },
   "dependencies": {},
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    }
+  },
   "optionalDependencies": {},
   "devDependencies": {
+    "@commitlint/config-conventional": "latest",
     "eslint-config-strict-mode": "latest",
     "git-cz-emoji": "latest",
+    "handlebars-helpers": "latest",
+    "prettier": "^2.4.1",
     "prettier-config-sexy-mode": "latest",
     "semantic-release-config": "latest",
-    "typescript": "^4.5.5",
-    "@commitlint/config-conventional": "latest",
-    "handlebars-helpers": "latest"
+    "typescript": "^4.5.5"
   },
   "keywords": [
     "mblabs",
@@ -55,7 +61,7 @@
     "washingtondc"
   ],
   "engines": {
-    "node": ">=14.18.0"
+    "node": ">=18.4.0"
   },
   "publishConfig": {
     "@gitlab:registry": "https://gitlab.com/api/v4/projects/24794871/packages/npm/",
@@ -94,7 +100,9 @@
     "showAuthor": true
   },
   "commitlint": {
-    "extends": [],
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
     "helpUrl": "https://megabyte.space/docs/contributing/commits"
   },
   "eslintConfig": {
@@ -114,8 +122,36 @@
     }
   ],
   "jscpd": {
+    "absolute": true,
     "gitignore": true,
-    "threshold": 0.1
+    "ignore": [
+      "!**/.devcontainer/**/*",
+      "!**/.config/**/*",
+      "!**/.git/**/*",
+      "!**/.github/**/*",
+      "!**/.gitlab/**/*",
+      "!**/.vscode/**/*",
+      "!**/common/.config/taskfiles/**/*",
+      "!**/docs/**/*",
+      "!**/.editorconfig",
+      "!**/.gitignore",
+      "!**/.npmrc",
+      "!**/.gitlab-ci.yml",
+      "!**/README.md",
+      "!**/LICENSE",
+      "!**/Taskfile.yml",
+      "!**/logo.png",
+      "!**/package.json",
+      "!**/start.sh",
+      "!**/pnpm-lock.yaml",
+      "!**/package-lock.json",
+      "!**/poetry.lock",
+      "!**/pyproject.toml",
+      "!**/requirements.yml",
+      "!**/yarn.lock",
+      "!**/deprecated/**/*"
+    ],
+    "threshold": 14
   },
   "lint-staged": {
     "(Brewfile|composer.lock|Gemfile|Gopkg.lock|Pipfile.lock)": [
@@ -237,5 +273,9 @@
       }
     ],
     "extends": "semantic-release-config"
+  },
+  "volta": {
+    "node": "16.19.1",
+    "yarn": "1.22.19"
   }
 }

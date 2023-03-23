@@ -40,6 +40,15 @@ includes:
   cloud:
     taskfile: ./.config/taskfiles/cloud/Taskfile.yml
     optional: true
+  cloud:cloudflare:
+    taskfile: ./.config/taskfiles/cloud/Taskfile-cloudflare.yml
+    optional: true
+  cloud:dyno:
+    taskfile: ./.config/taskfiles/cloud/Taskfile-dyno.yml
+    optional: true
+  cloud:heroku:
+    taskfile: ./.config/taskfiles/cloud/Taskfile-heroku.yml
+    optional: true
   cloud:s3:
     taskfile: ./.config/taskfiles/cloud/Taskfile-s3.yml
     optional: true
@@ -171,6 +180,9 @@ includes:
     optional: true
   lint:prose:
     taskfile: ./.config/taskfiles/lint/Taskfile-prose.yml
+    optional: true
+  local:
+    taskfile: ./../../../Taskfile-local.yml
     optional: true
   log:
     optional: true
@@ -361,17 +373,9 @@ vars:
   MODEL_TASKFILE: https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml
   NPM_KEEP_UPDATED: ''
   NPM_PROGRAM: pnpm
-  NPM_PROGRAM_LOCAL: pnpm
-  NPX_HANDLE:
-    sh: |
-      if type pnpx &> /dev/null; then
-        echo 'pnpx '
-      elif type pnpm &> /dev/null; then
-        echo 'pnpm '
-      fi
   PROJECT_TYPE:
     sh: |
-      if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.group' package.json)"; if [ "$VER" == 'null' ]; then echo TYPE="$GROUP_TYPE"; else TYPE="$VER"; fi; else TYPE="$GROUP_TYPE"; fi
+      if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.group' package.json)"; if [ "$VER" == 'null' ]; then TYPE="$GROUP_TYPE"; else TYPE="$VER"; fi; else TYPE="$GROUP_TYPE"; fi
       if type jq &> /dev/null && [ -f package.json ]; then VER="$(jq -r '.blueprint.subgroup' package.json)"; if [ "$VER" == 'null' ]; then SUBTYPE="$REPOSITORY_TYPE"; else SUBTYPE="$VER"; fi; else SUBTYPE="$REPOSITORY_TYPE"; fi
       if [ "$TYPE" == 'common' ] && [ "$SUBTYPE" == 'shared' ]; then
         echo 'shared'
@@ -421,6 +425,7 @@ env:
       PATH="$PATH:$HOME/.local/go/bin:$HOME/go/bin"
       PATH="$PATH:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin"
       PATH="$PATH:$PWD/bin"
+      PATH="$PATH:$HOME/.volta/bin"
       echo "$PATH"
   RECORD_INSTALL:
     sh: if [ -n "$CI" ]; then echo 'true'; fi
@@ -430,6 +435,8 @@ env:
         DSN="$(jq -r '.blueprint.sentryDSN' package.json)"
         if [ "$DSN" != 'null' ]; then echo "$DSN"; fi
       fi
+  VOLTA_HOME:
+    sh: echo "$HOME/.volta"
 profile: |
   if [[ "$OSTYPE" == 'linux-gnu'* ]] || [[ "$OSTYPE" == 'linux-musl'* ]]; then
     if [ -f /home/linuxbrew/.linuxbrew/bin/brew ] && ! type brew > /dev/null; then
@@ -551,7 +558,7 @@ tasks:
       - |
         task --list > /dev/null || (echo "ERROR: Invalid Taskfiles!" && exit 1)
         git add --all
-      - "HUSKY=0 git commit -m '\U0001F527 chore(tweak)": quick minor update' --no-verify
+      - ".config/log info 'Bypassing git hooks for git commit'\nHUSKY=0 git commit -m \"\U0001F527 chore(tweak): quick minor update\" --no-verify\n"
       - git push origin master
   devcontainer:
     deps:
@@ -833,7 +840,7 @@ tasks:
       start: Publishing `semantic-release` update via `task publish:force`
       success: Successfully published update via `task publish:force`
     cmds:
-      - "HUSKY=0 git commit -a --allow-empty -m '\U0001F528 chore(bump): Forced semantic-release {{.UPDATE_LEVEL}}' -n\n"
+      - ".config/log info 'Bypassing git hooks for git commit'\nHUSKY=0 git commit -a --allow-empty -m '\U0001F528 chore(bump): Forced semantic-release {{.UPDATE_LEVEL}}' --no-verify\n"
       - task: publish
   pull:upstream:
     desc: Pull from upstream repositories
@@ -855,10 +862,11 @@ tasks:
     cmds:
       - task: common:repair
       - |
+        TMP="$(mktemp)"
         if [ -n "$UPDATE_INIT_SCRIPT" ]; then
-          bash <(curl -sSL "$UPDATE_INIT_SCRIPT")
+          curl -sSL "$UPDATE_INIT_SCRIPT" > "$TMP" && bash "$TMP" && rm "$TMP"
         else
-          bash <(curl -sSL {{.INIT_SCRIPT}})
+          curl -sSL {{.INIT_SCRIPT}} > "$TMP" && bash "$TMP" && rm "$TMP"
         fi
   reset:
     desc: Resets the project by removing all caches and then re-generating templated files
@@ -902,10 +910,10 @@ tasks:
       task is a convenience method that will present a list of scripts alongside
       their descriptions that you can interactively launch.
     log:
-      error: Error running `NTL_RUNNER={{.NPM_PROGRAM}} {{.NPX_HANDLE}}ntl`
-      start: Running `NTL_RUNNER={{.NPM_PROGRAM}} {{.NPX_HANDLE}}ntl`
+      error: Error running `NTL_RUNNER={{.NPM_PROGRAM}} ntl`
+      start: Running `NTL_RUNNER={{.NPM_PROGRAM}} ntl`
     cmds:
-      - NTL_RUNNER={{.NPM_PROGRAM}} {{.NPX_HANDLE}}ntl
+      - NTL_RUNNER={{.NPM_PROGRAM}} ntl
   services:
     desc: Update elements of the repository that require API access
     summary: |
@@ -951,6 +959,11 @@ tasks:
       * ubuntu-21.04
     cmds:
       - task: common:shell
+  ssh-keys:
+    deps:
+      - cloud:heroku:ssh-keys
+      - git:github:ssh-keys
+      - git:gitlab:ssh-keys
   start:
     desc: Start the project by installing / updating dependencies, repairing issues, and opening a tutorial
     summary: |
@@ -1035,7 +1048,7 @@ tasks:
           FILE="$1"
           TMP="$(mktemp)"
           .config/log info 'Generating `'"${FILE//.liquid}"'` from `'"$FILE"'`'
-          {{.NPX_HANDLE}}hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "$TMP"
+          hbs --data .variables.json --helper ./.config/hbs.cjs "$FILE" --stdout > "$TMP"
           mv "$TMP" "${FILE//.liquid}"
           rm "$FILE"
         }
@@ -1107,4 +1120,7 @@ tasks:
 
       We do still recommend that you skim through the guide.
     cmds:
-      - task: security:yubikey:prepare
+      - |
+        export GNUPGHOME="$HOME/.gnupgyubi"
+        export MASTER_KEY="$(LC_ALL=C tr -dc '[:upper:]' < /dev/urandom | fold -w 30 | head -n1)"
+        task security:yubikey:prepare

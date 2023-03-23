@@ -70,14 +70,14 @@ tasks:
       - git init
       - git remote add origin "{{.GITLAB_REPO}}"
       - git add --all
-      - git commit --quiet -m "🧐 refactor(submodule): Adding folder/project to its own git repository."
+      - git commit --quiet -m "🧐 refactor(submodule) Adding folder/project to its own git repository."
       - git push --quiet -u --no-progress origin master
       - cd .. && rm -rf {{.BASENAME}}
       - cd .. && git add {{.BASENAME}}
-      - cd .. && git commit --quiet -m "🧐 refactor(submodule): Removing folder which will now be a submodule."
+      - git commit --quiet -m "🧐 refactor(submodule) Removing folder which will now be a submodule."
       - cd .. && git submodule add -b master "{{.GITLAB_REPO}}" {{.BASENAME}}
       - cd .. && git add {{.BASENAME}}
-      - cd .. && git commit --quiet -m "🧐 refactor(submodule): Adding new submodule which was previously a directory."
+      - cd .. && git commit --quiet -m "🧐 refactor(submodule) Adding new submodule which was previously a directory."
       - cd .. && git push --quiet -u --no-progress origin HEAD
     preconditions:
       - sh: '[[ ! $(git rev-parse --git-dir) =~ ".git/modules" ]]'
@@ -86,6 +86,17 @@ tasks:
   convert:folder:subrepo:
     deps:
       - :install:software:subrepo
+    summary: |
+      # Convert Folder to Sub-repo
+
+      This task will work if you have Taskfiles set up in a sub-directory of a project
+      that is already a git repository. Instead of using sub-modules, this method makes
+      the main repository's structure look as if no sub-module wizardry is going on.
+
+      To use this task, go into a sub-directory that you want to make a git subrepo and
+      then run `task git:convert:folder:subrepo` while making sure that the
+      `FULLY_AUTOMATED_TASKS` variables is set equal to `true`. There may be other
+      tokens required for accessing the APIs of GitHub, GitLab, etc.
     vars:
       BASENAME:
         sh: basename "$PWD"
@@ -97,20 +108,38 @@ tasks:
       success: Converted `{{.BASENAME}}` into a sub-repo
     cmds:
       - rm -rf .git
+      - git config url."git@gitlab.com:".insteadOf "https://gitlab.com/"
+      - git config url."git@github.com:".insteadOf "https://github.com/"
+      - task: commit:automated
       - |
         ROLE_DIR="$PWD"
         while ! test -d .git; do cd ..; done
-        git remote add {{.BASENAME}} {{.GITLAB_REPO}}
+        if ! git remote get-url {{.BASENAME}} &> /dev/null; then
+          git remote add {{.BASENAME}} {{.GITLAB_REPO}}
+        fi
         RELATIVE_DIR="$(echo $ROLE_DIR | sed 's@'"$PWD"'/@@')"
-        HUSKY=0 git subrepo clone {{.BASENAME}} "$RELATIVE_DIR" -b master
+        task git:commit:automated
+        HUSKY=0 git subrepo init "$RELATIVE_DIR" -r {{.BASENAME}} -b master
+    status:
+      - '[ "$FULLY_AUTOMATED_TASKS" != "true" ]'
 
   filter:
+    deps:
+      - :install:software:bfg
+    desc: Remove large unnecessary and large files from the repository
+    summary: |
+      # Clean Up Git Repository
+
+      This task will remove files that may have been committed by accident like node_modules.
+      It will also use [bfg](https://rtyley.github.io/bfg-repo-cleaner/) to remove all files
+      that are over 50MB.
     log:
       error: Error filtering git history
       start: Filtering unnecessary items from git history
       success: Successfully filtered unnecessary items from git history
     cmds:
       - git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch -r **/node_modules/' --prune-empty -- --all
+      - bfg --strip-blobs-bigger-than 50M
 
   push:all:
     deps:

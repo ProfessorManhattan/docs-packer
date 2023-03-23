@@ -58,7 +58,8 @@ tasks:
         else
           curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/raw/master/.config/codeclimate.yml > .codeclimate.yml
         fi
-      - docker pull codeclimate/codeclimate
+      - docker pull megabytelabs/codeclimate-internet
+      - docker tag megabytelabs/codeclimate-internet codeclimate/codeclimate
       - task: :lint:codeclimate:load:custom-engines
       - task: codeclimate:gitlab
 
@@ -136,6 +137,10 @@ tasks:
           rm -f yarn.lock
         fi
 
+  mirror:github:
+    deps:
+      - :donothing
+
   submodules:
     deps:
       - :install:software:git
@@ -172,6 +177,7 @@ tasks:
         fi
       - task: synchronize:gitlab
       - git checkout master
+      - task: :ci:github:synchronize
     status:
       - '[ -n "$NO_GIT_CREDS" ] || ([ "$FULLY_AUTOMATED_TASKS" != "true" ] && [ -z "$CI" ])'
 

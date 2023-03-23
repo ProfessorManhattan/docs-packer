@@ -54,6 +54,15 @@ tasks:
     status:
       - type axel > /dev/null
 
+  bfg:
+    run: once
+    cmds:
+      - task: install:software
+        vars:
+          PACKAGE: bfg
+    status:
+      - type bfg > /dev/null
+
   brew:
     run: once
     log:
@@ -144,6 +153,12 @@ tasks:
   brew:windows:
     cmds:
       - task: common:windows
+
+  bundle:
+    deps:
+      - brew
+    cmds:
+      - brew tap Homebrew/bundle
 
   codeclimate:
     cmds:
@@ -492,6 +507,7 @@ tasks:
     run: once
     cmds:
       - task: docker:{{OS}}
+      - task: :docker:ensure:running
     status:
       - type docker > /dev/null
 
@@ -1074,8 +1090,12 @@ tasks:
           PACKAGE: peak/tap/s5cmd
 
   sentry:
+    run: once
     cmds:
-      - task: :install:github:sentry
+      - task: install:software
+        vars:
+          BIN_NAME: sentry-cli
+          PACKAGE: getsentry/tools/sentry-cli
 
   snapcraft:
     run: once
@@ -1261,6 +1281,14 @@ tasks:
         fi
     status:
       - '[ -z "$(which yum)" ]'
+
+  task:
+    run: once
+    cmds:
+      - |
+        if [[ "$(which task)" == *'.local/bin/task' ]] && command -v brew > /dev/null && ! brew list go-task/tap/go-task; then
+          brew install go-task/tap/go-task
+        fi
 
   tokei:
     run: once

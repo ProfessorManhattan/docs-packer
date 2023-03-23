@@ -8,6 +8,7 @@
 #   that is using the Megabyte Labs templating/taskfile system. The `start` task will
 #   ensure that the latest upstream changes are retrieved, that the project is
 #   properly generated with them, and that all the development dependencies are installed.
+#   Documentation on Taskfile.yml syntax can be found [here](https://taskfile.dev/).
 
 set -eo pipefail
 
@@ -212,7 +213,7 @@ function ensureLocalPath() {
     # shellcheck disable=SC2016
     PATH_STRING='export PATH="$HOME/.local/bin:$PATH"'
     mkdir -p "$HOME/.local/bin"
-    if ! cat "$HOME/.profile" | grep "$PATH_STRING" > /dev/null; then
+    if ! grep "$PATH_STRING" < "$HOME/.profile" > /dev/null; then
       echo -e "${PATH_STRING}\n" >> "$HOME/.profile"
       logger info "Updated the PATH variable to include ~/.local/bin in $HOME/.profile"
     fi
@@ -482,8 +483,10 @@ function ensureTaskfiles() {
     fi
     if [ -n "$BOOTSTRAP_EXIT_CODE" ] && ! task donothing; then
       # task donothing still does not work so issue must be with main Taskfile.yml
+      # shellcheck disable=SC2016
       logger warn 'Something is wrong with the `Taskfile.yml` - grabbing main `Taskfile.yml`'
       git checkout HEAD~1 -- Taskfile.yml
+      task --list || curl -sSL https://gitlab.com/megabyte-labs/common/shared/-/raw/master/Taskfile.yml
       if ! task donothing; then
         logger error 'Error appears to be with main Taskfile.yml'
       else
@@ -525,6 +528,23 @@ if [ ! -f "$HOME/.profile" ]; then
   touch "$HOME/.profile"
 fi
 
+# @description Ensure git hosts are all in ~/.ssh/known_hosts
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+if [ ! -f ~/.ssh/known_hosts ]; then
+  touch ~/.ssh/known_hosts
+  chmod 600 ~/.ssh/known_hosts
+fi
+if ! grep -q "^gitlab.com " ~/.ssh/known_hosts; then
+  ssh-keyscan gitlab.com >> ~/.ssh/known_hosts 2>/dev/null
+fi
+if ! grep -q "^github.com " ~/.ssh/known_hosts; then
+  ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+fi
+if ! grep -q "^bitbucket.org " ~/.ssh/known_hosts; then
+  ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts 2>/dev/null
+fi
+
 # @description Ensures ~/.local/bin is in PATH
 ensureLocalPath
 
@@ -558,11 +578,25 @@ if [ -z "$NO_INSTALL_HOMEBREW" ]; then
           echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         else
           logger warn "Homebrew is not installed. The script will attempt to install Homebrew and you might be prompted for your password."
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || BREW_EXIT_CODE="$?"
+          if [ -n "$BREW_EXIT_CODE" ]; then
+            if command -v brew > /dev/null; then
+              .config/log warn "Homebrew was installed but part of the installation failed. Retrying again after changing a few things.."
+              BREW_DIRS="share/man share/doc share/zsh/site-functions etc/bash_completion.d"
+              for BREW_DIR in $BREW_DIRS; do
+                if [ -d "$(brew --prefix)/$BREW_DIR" ]; then
+                  sudo chown -R "$(whoami)" "$(brew --prefix)/$BREW_DIR"
+                fi
+              done
+              brew update --force --quiet
+            fi
+          fi
         fi
       fi
       if ! (grep "/bin/brew shellenv" < "$HOME/.profile" &> /dev/null) && [[ "$OSTYPE" != 'darwin'* ]]; then
+        # shellcheck disable=SC2016
         logger info 'Adding linuxbrew source command to `~/.profile`'
+        # shellcheck disable=SC2016
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$HOME/.profile"
       fi
       if [ -f "$HOME/.profile" ]; then
@@ -584,6 +618,7 @@ if [ -z "$NO_INSTALL_HOMEBREW" ]; then
       if ! type volta &> /dev/null || ! type node &> /dev/null; then
         # shellcheck disable=SC2016
         curl https://get.volta.sh | bash
+        # shellcheck disable=SC1091
         . "$HOME/.profile" &> /dev/null || true
         volta setup
         volta install node
@@ -640,7 +675,12 @@ if [ -d .git ] && type git &> /dev/null; then
         printenv
       fi
     fi
-    git pull --force origin master --ff-only || true
+    git pull --force origin master --ff-only || GIT_PULL_FAIL="$?"
+    if [ -n "$GIT_PULL_FAIL" ]; then
+      git config url."https://gitlab.com/".insteadOf git@gitlab.com:
+      git config url."https://github.com/".insteadOf git@github.com:
+      git pull --force origin master --ff-only || true
+    fi
     ROOT_DIR="$PWD"
     if ls .modules/*/ > /dev/null 2>&1; then
       for SUBMODULE_PATH in .modules/*/; do
@@ -675,8 +715,8 @@ if [ -z "$CI" ] && [ -z "$START" ] && [ -z "$INIT_CWD" ]; then
   if ! type pipx &> /dev/null; then
     task install:software:pipx
   fi
-  # shellcheck disable=SC1091
   logger info "Sourcing profile located in $HOME/.profile"
+  # shellcheck disable=SC1091
   . "$HOME/.profile" &> /dev/null || true
   ensureProjectBootstrapped
   if task donothing &> /dev/null; then
